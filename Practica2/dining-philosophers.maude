@@ -1,0 +1,53 @@
+fth NAT* is
+    protecting NAT .
+    op k : -> NzNat .
+endfth
+
+fmod NAT/{k :: NAT*} is
+    sort Nat/{k} .
+    op [_] : Nat -> Nat/{k} .
+    var N : Nat .
+    ceq [ N ] = [ sd(N, k) ] if N >= k .
+endfm
+
+mod DINING-PHILOSOPHERS{P :: NAT*} is
+    pr NAT/{P} .
+
+    sort Status Philosopher Chopstick Configuration .
+    subsorts Philosopher Chopstick < Configuration .
+
+    ops thinking hungry eating : -> Status [ctor] .
+
+    op philosopher : Nat/{P} Status Nat -> Philosopher [ctor] .
+    op chopstick : Nat/{P} -> Chopstick [ctor] .
+
+    op none : -> Configuration [ctor] .
+    op __ : Configuration Configuration -> Configuration [ctor comm assoc id: none] .
+
+    vars N M C : Nat .
+
+    op init_ : Nat -> Configuration .
+    eq init 0 = none .
+    eq init s N = chopstick([ N ]) philosopher([ N ], thinking, 0) init N .
+
+    op initState : -> Configuration [ctor] .
+    eq initState = init k .
+
+    var NP : Nat/{P} .
+
+    rl [get-hungry] : philosopher(NP, thinking, 0) => philosopher(NP, hungry, 0) .
+    crl [grab-stick] : chopstick([ N ]) philosopher([ M ], hungry, C) => philosopher([ M ], hungry, s C) 
+        if (([ N ] == [ M ]) or ([ s M ] == [ N ])) and (C < 2) .
+    rl [eat] : philosopher(NP, hungry, s s 0) => philosopher(NP, eating, s s 0) .
+    rl [think] : philosopher([ N ], eating, s s 0) => chopstick([ N ]) philosopher([ N ], thinking, 0) chopstick([ s N ]) .
+
+endm
+
+view 5 from NAT* to INT is
+    op k to term 5 .
+endv
+
+mod DINING-PHILOSOPHERS-5 is
+    pr DINING-PHILOSOPHERS{5} .
+endm
+
