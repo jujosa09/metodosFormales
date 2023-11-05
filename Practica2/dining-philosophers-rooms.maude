@@ -1,0 +1,85 @@
+fth NAT* is
+    protecting NAT .
+    op k : -> NzNat .
+endfth
+
+fmod NAT/{k :: NAT*} is
+    sort Nat/{k} .
+    op [_] : Nat -> Nat/{k} .
+    var N : Nat .
+    ceq [ N ] = [ sd(N, k) ] if N >= k .
+endfm
+
+mod DINING-PHILOSOPHERS-ROOMS{P :: NAT*} is
+    pr NAT/{P} .
+
+    sort Status Philosopher Chopstick Configuration Queue System .
+    subsorts Philosopher Chopstick < Configuration .
+    subsort Nat/{P} < Queue .
+
+    ops thinking hungry eating : -> Status [ctor] .
+
+    op philosopher : Nat/{P} Status Nat -> Philosopher [ctor] .
+    op chopstick : Nat/{P} -> Chopstick [ctor] .
+
+    op none : -> Configuration [ctor] .
+    op __ : Configuration Configuration -> Configuration [ctor comm assoc id: none prec 20] .
+
+    op empty : -> Queue [ctor] .
+    op __ : Queue Queue -> Queue [ctor assoc id: empty prec 20] .
+
+    op [_,_,_] : Configuration Queue Configuration -> System [ctor prec 21] .   ---- [mesa, cola de filósofos, filósofos fuera de la mesa]
+
+    vars N M C : Nat .
+
+    op initChopsticks_ : Nat -> Configuration .
+    eq initChopsticks 0 = none .
+    eq initChopsticks s N = chopstick([ N ]) initChopsticks N .
+
+    op initPhilosophers_ : Nat -> Configuration .
+    eq initPhilosophers 0 = none .
+    eq initPhilosophers s N = philosopher([ N ], thinking, 0) initPhilosophers N .
+
+    op initState : -> System [ctor] .
+    eq initState = [ initChopsticks k, empty, initPhilosophers k ].
+
+    var NP : Nat/{P} .
+    vars CMesa CFilosofos : Configuration .
+    var Q : Queue .
+    var Philosopher : Philosopher .
+    var Chopstick : Chopstick .
+
+    op countPhilosophers_ : Configuration -> Nat .
+    eq countPhilosophers none = 0 .
+    eq countPhilosophers (Chopstick CMesa) = countPhilosophers CMesa .
+    eq countPhilosophers (Philosopher CMesa) = s countPhilosophers CMesa .
+
+    rl [get-hungry] : [ CMesa, Q, philosopher([ N ], thinking, 0) CFilosofos ] => [ CMesa, Q [ N ] , philosopher([ N ], hungry, 0)  CFilosofos ] .
+    crl [enter] : [ CMesa, [N] Q, philosopher([ N ], hungry, 0) CFilosofos ] => [ CMesa philosopher([ N ], hungry, 0), Q, CFilosofos ]
+       if (countPhilosophers CMesa < sd(k, 1)) .
+    crl [grab-stick] : [ CMesa philosopher([ N ], hungry, C) chopstick([ M ]), Q, CFilosofos ] => [ CMesa philosopher([ N ], hungry, s C), Q , CFilosofos ] 
+        if ([ N ] == [ M ] or [ s N ] == [ M ] and C < 2) .
+    rl [eat] : [ CMesa philosopher([ N ], hungry, 2), Q, CFilosofos ] => [ CMesa philosopher([ N ], eating, 2), Q, CFilosofos ] .
+    rl [think] : [ CMesa philosopher([ N ], eating, 2), Q, CFilosofos ] => [ CMesa chopstick([ N ]) chopstick([ s N ]), Q, philosopher([ N ], thinking, 0) CFilosofos ] .
+
+endm
+
+view 5 from NAT* to INT is
+    op k to term 5 .
+endv
+
+mod DINING-PHILOSOPHERS-ROOMS-5 is
+    pr DINING-PHILOSOPHERS-ROOMS{5} .
+endm
+
+eof
+
+Maude> search initState =>! s:System .
+search in DINING-PHILOSOPHERS-ROOMS-5 : initState =>! s:System .
+
+No solution.
+states: 10306  rewrites: 734837 in 562ms cpu (572ms real) (1306376 rewrites/second)
+Maude>
+
+
+

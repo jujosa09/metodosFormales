@@ -1,0 +1,31 @@
+load model-checker.maude
+load dining-philosophers-rooms.maude
+
+mod DINING-PHILOSOPHERS-ROOMS-PREDS{P :: NAT*} is
+    pr DINING-PHILOSOPHERS-ROOMS{P} .
+    including SATISFACTION .
+    subsort System < State .
+    
+    op phil-status : Nat/{P} Status -> Prop .
+    op phil-sticks : Nat/{P} Nat -> Prop .
+
+    var S : Status .
+    var M : Nat .
+
+    var NP : Nat/{P} .
+    vars CMesa CFilosofos : Configuration .
+    var Q : Queue .
+
+    eq [philosopher(NP, S, M) CMesa, Q, CFilosofos] |= phil-status(NP, S) 
+        = true .
+
+    eq [CMesa, Q, philosopher(NP, S, M) CFilosofos] |= phil-status(NP, S) 
+        = true .
+
+    eq [philosopher(NP, S, M) CMesa, Q, CFilosofos] |= phil-sticks(NP, M)
+        = true .
+
+    eq [CMesa, Q, philosopher(NP, S, M)  CFilosofos] |= phil-sticks(NP, M)
+        = true .
+
+endm

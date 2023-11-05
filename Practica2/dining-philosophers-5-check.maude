@@ -8,10 +8,10 @@ endm
 
 eof
 
-Maude> red modelCheck (initState, [](~(phil-sticks([0], 1)) /\ ~(phil-sticks([1], 1)) /\ ~(phil-sticks([2], 1)) /\ ~(phil-sticks([3], 1)) /\ ~(phil-sticks([4], 1)))) .
-reduce in DINING-PHILOSOPHERS-CHECK : modelCheck(initState, [](~ phil-sticks([4], 1) /\ (~ phil-sticks([3], 1)
-    /\ (~ phil-sticks([2], 1) /\ (~ phil-sticks([0], 1) /\ ~ phil-sticks([1], 1)))))) .
-rewrites: 8947 in 15ms cpu (13ms real) (572608 rewrites/second)
+Maude> red modelCheck(initState, []~(phil-sticks([0], 1) /\ phil-sticks([1], 1) /\ phil-sticks([2], 1) /\ phil-sticks([3], 1) /\ phil-sticks([4], 1))) .
+reduce in DINING-PHILOSOPHERS-CHECK : modelCheck(initState, []~ (phil-sticks([4], 1) /\ (
+    phil-sticks([3], 1) /\ (phil-sticks([2], 1) /\ (phil-sticks([0], 1) /\ phil-sticks([1], 1)))))) .
+rewrites: 8886 in 15ms cpu (7ms real) (568704 rewrites/second)
 result ModelCheckResult: counterexample({chopstick([0]) chopstick([1]) chopstick([2]) chopstick([3]) chopstick([4])
     philosopher([0], thinking, 0) philosopher([1], thinking, 0) philosopher([2], thinking, 0) philosopher([3],
     thinking, 0) philosopher([4], thinking, 0),'get-hungry} {chopstick([0]) chopstick([1]) chopstick([2]) chopstick([
@@ -22,171 +22,162 @@ result ModelCheckResult: counterexample({chopstick([0]) chopstick([1]) chopstick
     4]) philosopher([0], hungry, 2) philosopher([1], thinking, 0) philosopher([2], thinking, 0) philosopher([3],
     thinking, 0) philosopher([4], thinking, 0),'eat} {chopstick([2]) chopstick([3]) chopstick([4]) philosopher([0],
     eating, 2) philosopher([1], thinking, 0) philosopher([2], thinking, 0) philosopher([3], thinking, 0) philosopher([
-    4], thinking, 0),'think} {chopstick([0]) chopstick([1]) chopstick([2]) chopstick([3]) chopstick([4]) philosopher([
-    0], thinking, 0) philosopher([1], thinking, 0) philosopher([2], thinking, 0) philosopher([3], thinking, 0)
-    philosopher([4], thinking, 0),'get-hungry} {chopstick([0]) chopstick([1]) chopstick([2]) chopstick([3]) chopstick([
-    4]) philosopher([0], hungry, 0) philosopher([1], thinking, 0) philosopher([2], thinking, 0) philosopher([3],
-    thinking, 0) philosopher([4], thinking, 0),'grab-stick} {chopstick([0]) chopstick([2]) chopstick([3]) chopstick([
-    4]) philosopher([0], hungry, 1) philosopher([1], thinking, 0) philosopher([2], thinking, 0) philosopher([3],
-    thinking, 0) philosopher([4], thinking, 0),'get-hungry} {chopstick([0]) chopstick([2]) chopstick([3]) chopstick([
-    4]) philosopher([0], hungry, 1) philosopher([1], hungry, 0) philosopher([2], thinking, 0) philosopher([3],
-    thinking, 0) philosopher([4], thinking, 0),'grab-stick} {chopstick([2]) chopstick([3]) chopstick([4]) philosopher([
-    0], hungry, 2) philosopher([1], hungry, 0) philosopher([2], thinking, 0) philosopher([3], thinking, 0) philosopher(
-    [4], thinking, 0),'grab-stick} {chopstick([3]) chopstick([4]) philosopher([0], hungry, 2) philosopher([1], hungry,
-    1) philosopher([2], thinking, 0) philosopher([3], thinking, 0) philosopher([4], thinking, 0),'eat} {chopstick([3])
-    chopstick([4]) philosopher([0], eating, 2) philosopher([1], hungry, 1) philosopher([2], thinking, 0) philosopher([
-    3], thinking, 0) philosopher([4], thinking, 0),'think} {chopstick([0]) chopstick([1]) chopstick([3]) chopstick([4])
-    philosopher([0], thinking, 0) philosopher([1], hungry, 1) philosopher([2], thinking, 0) philosopher([3], thinking,
-    0) philosopher([4], thinking, 0),'grab-stick} {chopstick([0]) chopstick([3]) chopstick([4]) philosopher([0],
-    thinking, 0) philosopher([1], hungry, 2) philosopher([2], thinking, 0) philosopher([3], thinking, 0) philosopher([
-    4], thinking, 0),'get-hungry} {chopstick([0]) chopstick([3]) chopstick([4]) philosopher([0], hungry, 0)
+    4], thinking, 0),'get-hungry} {chopstick([2]) chopstick([3]) chopstick([4]) philosopher([0], eating, 2)
+    philosopher([1], hungry, 0) philosopher([2], thinking, 0) philosopher([3], thinking, 0) philosopher([4], thinking,
+    0),'grab-stick} {chopstick([3]) chopstick([4]) philosopher([0], eating, 2) philosopher([1], hungry, 1) philosopher(
+    [2], thinking, 0) philosopher([3], thinking, 0) philosopher([4], thinking, 0),'think} {chopstick([0]) chopstick([
+    1]) chopstick([3]) chopstick([4]) philosopher([0], thinking, 0) philosopher([1], hungry, 1) philosopher([2],
+    thinking, 0) philosopher([3], thinking, 0) philosopher([4], thinking, 0),'grab-stick} {chopstick([0]) chopstick([
+    3]) chopstick([4]) philosopher([0], thinking, 0) philosopher([1], hungry, 2) philosopher([2], thinking, 0)
+    philosopher([3], thinking, 0) philosopher([4], thinking, 0),'get-hungry} {chopstick([0]) chopstick([3]) chopstick([
+    4]) philosopher([0], hungry, 0) philosopher([1], hungry, 2) philosopher([2], thinking, 0) philosopher([3],
+    thinking, 0) philosopher([4], thinking, 0),'grab-stick} {chopstick([3]) chopstick([4]) philosopher([0], hungry, 1)
     philosopher([1], hungry, 2) philosopher([2], thinking, 0) philosopher([3], thinking, 0) philosopher([4], thinking,
-    0),'grab-stick} {chopstick([3]) chopstick([4]) philosopher([0], hungry, 1) philosopher([1], hungry, 2) philosopher(
-    [2], thinking, 0) philosopher([3], thinking, 0) philosopher([4], thinking, 0),'eat} {chopstick([3]) chopstick([4])
-    philosopher([0], hungry, 1) philosopher([1], eating, 2) philosopher([2], thinking, 0) philosopher([3], thinking, 0)
-    philosopher([4], thinking, 0),'get-hungry} {chopstick([3]) chopstick([4]) philosopher([0], hungry, 1) philosopher([
-    1], eating, 2) philosopher([2], hungry, 0) philosopher([3], thinking, 0) philosopher([4], thinking, 0),'grab-stick}
-    {chopstick([4]) philosopher([0], hungry, 1) philosopher([1], eating, 2) philosopher([2], hungry, 1) philosopher([
-    3], thinking, 0) philosopher([4], thinking, 0),'think} {chopstick([1]) chopstick([2]) chopstick([4]) philosopher([
-    0], hungry, 1) philosopher([1], thinking, 0) philosopher([2], hungry, 1) philosopher([3], thinking, 0) philosopher(
-    [4], thinking, 0),'grab-stick} {chopstick([2]) chopstick([4]) philosopher([0], hungry, 2) philosopher([1],
-    thinking, 0) philosopher([2], hungry, 1) philosopher([3], thinking, 0) philosopher([4], thinking, 0),'grab-stick} {
-    chopstick([4]) philosopher([0], hungry, 2) philosopher([1], thinking, 0) philosopher([2], hungry, 2) philosopher([
-    3], thinking, 0) philosopher([4], thinking, 0),'eat} {chopstick([4]) philosopher([0], eating, 2) philosopher([1],
-    thinking, 0) philosopher([2], hungry, 2) philosopher([3], thinking, 0) philosopher([4], thinking, 0),'think} {
-    chopstick([0]) chopstick([1]) chopstick([4]) philosopher([0], thinking, 0) philosopher([1], thinking, 0)
+    0),'eat} {chopstick([3]) chopstick([4]) philosopher([0], hungry, 1) philosopher([1], eating, 2) philosopher([2],
+    thinking, 0) philosopher([3], thinking, 0) philosopher([4], thinking, 0),'get-hungry} {chopstick([3]) chopstick([
+    4]) philosopher([0], hungry, 1) philosopher([1], eating, 2) philosopher([2], hungry, 0) philosopher([3], thinking,
+    0) philosopher([4], thinking, 0),'grab-stick} {chopstick([4]) philosopher([0], hungry, 1) philosopher([1], eating,
+    2) philosopher([2], hungry, 1) philosopher([3], thinking, 0) philosopher([4], thinking, 0),'think} {chopstick([1])
+    chopstick([2]) chopstick([4]) philosopher([0], hungry, 1) philosopher([1], thinking, 0) philosopher([2], hungry, 1)
+    philosopher([3], thinking, 0) philosopher([4], thinking, 0),'grab-stick} {chopstick([2]) chopstick([4])
+    philosopher([0], hungry, 2) philosopher([1], thinking, 0) philosopher([2], hungry, 1) philosopher([3], thinking, 0)
+    philosopher([4], thinking, 0),'grab-stick} {chopstick([4]) philosopher([0], hungry, 2) philosopher([1], thinking,
+    0) philosopher([2], hungry, 2) philosopher([3], thinking, 0) philosopher([4], thinking, 0),'eat} {chopstick([4])
+    philosopher([0], eating, 2) philosopher([1], thinking, 0) philosopher([2], hungry, 2) philosopher([3], thinking, 0)
+    philosopher([4], thinking, 0),'think} {chopstick([0]) chopstick([1]) chopstick([4]) philosopher([0], thinking, 0)
+    philosopher([1], thinking, 0) philosopher([2], hungry, 2) philosopher([3], thinking, 0) philosopher([4], thinking,
+    0),'get-hungry} {chopstick([0]) chopstick([1]) chopstick([4]) philosopher([0], hungry, 0) philosopher([1],
+    thinking, 0) philosopher([2], hungry, 2) philosopher([3], thinking, 0) philosopher([4], thinking, 0),'grab-stick} {
+    chopstick([1]) chopstick([4]) philosopher([0], hungry, 1) philosopher([1], thinking, 0) philosopher([2], hungry, 2)
+    philosopher([3], thinking, 0) philosopher([4], thinking, 0),'get-hungry} {chopstick([1]) chopstick([4])
+    philosopher([0], hungry, 1) philosopher([1], hungry, 0) philosopher([2], hungry, 2) philosopher([3], thinking, 0)
+    philosopher([4], thinking, 0),'grab-stick} {chopstick([4]) philosopher([0], hungry, 2) philosopher([1], hungry, 0)
+    philosopher([2], hungry, 2) philosopher([3], thinking, 0) philosopher([4], thinking, 0),'eat} {chopstick([4])
+    philosopher([0], eating, 2) philosopher([1], hungry, 0) philosopher([2], hungry, 2) philosopher([3], thinking, 0)
+    philosopher([4], thinking, 0),'think} {chopstick([0]) chopstick([1]) chopstick([4]) philosopher([0], thinking, 0)
+    philosopher([1], hungry, 0) philosopher([2], hungry, 2) philosopher([3], thinking, 0) philosopher([4], thinking,
+    0),'grab-stick} {chopstick([0]) chopstick([4]) philosopher([0], thinking, 0) philosopher([1], hungry, 1)
     philosopher([2], hungry, 2) philosopher([3], thinking, 0) philosopher([4], thinking, 0),'get-hungry} {chopstick([
-    0]) chopstick([1]) chopstick([4]) philosopher([0], hungry, 0) philosopher([1], thinking, 0) philosopher([2],
-    hungry, 2) philosopher([3], thinking, 0) philosopher([4], thinking, 0),'grab-stick} {chopstick([1]) chopstick([4])
-    philosopher([0], hungry, 1) philosopher([1], thinking, 0) philosopher([2], hungry, 2) philosopher([3], thinking, 0)
-    philosopher([4], thinking, 0),'get-hungry} {chopstick([1]) chopstick([4]) philosopher([0], hungry, 1) philosopher([
-    1], hungry, 0) philosopher([2], hungry, 2) philosopher([3], thinking, 0) philosopher([4], thinking, 0),'grab-stick}
-    {chopstick([4]) philosopher([0], hungry, 2) philosopher([1], hungry, 0) philosopher([2], hungry, 2) philosopher([
-    3], thinking, 0) philosopher([4], thinking, 0),'eat} {chopstick([4]) philosopher([0], eating, 2) philosopher([1],
-    hungry, 0) philosopher([2], hungry, 2) philosopher([3], thinking, 0) philosopher([4], thinking, 0),'think} {
-    chopstick([0]) chopstick([1]) chopstick([4]) philosopher([0], thinking, 0) philosopher([1], hungry, 0) philosopher(
-    [2], hungry, 2) philosopher([3], thinking, 0) philosopher([4], thinking, 0),'grab-stick} {chopstick([0]) chopstick(
-    [4]) philosopher([0], thinking, 0) philosopher([1], hungry, 1) philosopher([2], hungry, 2) philosopher([3],
-    thinking, 0) philosopher([4], thinking, 0),'get-hungry} {chopstick([0]) chopstick([4]) philosopher([0], hungry, 0)
+    0]) chopstick([4]) philosopher([0], hungry, 0) philosopher([1], hungry, 1) philosopher([2], hungry, 2) philosopher(
+    [3], thinking, 0) philosopher([4], thinking, 0),'grab-stick} {chopstick([4]) philosopher([0], hungry, 1)
     philosopher([1], hungry, 1) philosopher([2], hungry, 2) philosopher([3], thinking, 0) philosopher([4], thinking,
-    0),'grab-stick} {chopstick([4]) philosopher([0], hungry, 1) philosopher([1], hungry, 1) philosopher([2], hungry, 2)
-    philosopher([3], thinking, 0) philosopher([4], thinking, 0),'eat} {chopstick([4]) philosopher([0], hungry, 1)
-    philosopher([1], hungry, 1) philosopher([2], eating, 2) philosopher([3], thinking, 0) philosopher([4], thinking,
-    0),'think} {chopstick([2]) chopstick([3]) chopstick([4]) philosopher([0], hungry, 1) philosopher([1], hungry, 1)
-    philosopher([2], thinking, 0) philosopher([3], thinking, 0) philosopher([4], thinking, 0),'get-hungry} {chopstick([
-    2]) chopstick([3]) chopstick([4]) philosopher([0], hungry, 1) philosopher([1], hungry, 1) philosopher([2], hungry,
-    0) philosopher([3], thinking, 0) philosopher([4], thinking, 0),'grab-stick} {chopstick([3]) chopstick([4])
-    philosopher([0], hungry, 1) philosopher([1], hungry, 2) philosopher([2], hungry, 0) philosopher([3], thinking, 0)
-    philosopher([4], thinking, 0),'grab-stick} {chopstick([4]) philosopher([0], hungry, 1) philosopher([1], hungry, 2)
-    philosopher([2], hungry, 1) philosopher([3], thinking, 0) philosopher([4], thinking, 0),'get-hungry} {chopstick([
-    4]) philosopher([0], hungry, 1) philosopher([1], hungry, 2) philosopher([2], hungry, 1) philosopher([3], hungry, 0)
-    philosopher([4], thinking, 0),'grab-stick} {philosopher([0], hungry, 1) philosopher([1], hungry, 2) philosopher([
-    2], hungry, 1) philosopher([3], hungry, 1) philosopher([4], thinking, 0),'eat} {philosopher([0], hungry, 1)
-    philosopher([1], eating, 2) philosopher([2], hungry, 1) philosopher([3], hungry, 1) philosopher([4], thinking, 0),
-    'think} {chopstick([1]) chopstick([2]) philosopher([0], hungry, 1) philosopher([1], thinking, 0) philosopher([2],
-    hungry, 1) philosopher([3], hungry, 1) philosopher([4], thinking, 0),'grab-stick} {chopstick([2]) philosopher([0],
-    hungry, 2) philosopher([1], thinking, 0) philosopher([2], hungry, 1) philosopher([3], hungry, 1) philosopher([4],
-    thinking, 0),'grab-stick} {philosopher([0], hungry, 2) philosopher([1], thinking, 0) philosopher([2], hungry, 2)
-    philosopher([3], hungry, 1) philosopher([4], thinking, 0),'eat} {philosopher([0], eating, 2) philosopher([1],
-    thinking, 0) philosopher([2], hungry, 2) philosopher([3], hungry, 1) philosopher([4], thinking, 0),'think} {
-    chopstick([0]) chopstick([1]) philosopher([0], thinking, 0) philosopher([1], thinking, 0) philosopher([2], hungry,
-    2) philosopher([3], hungry, 1) philosopher([4], thinking, 0),'get-hungry} {chopstick([0]) chopstick([1])
-    philosopher([0], hungry, 0) philosopher([1], thinking, 0) philosopher([2], hungry, 2) philosopher([3], hungry, 1)
-    philosopher([4], thinking, 0),'grab-stick} {chopstick([1]) philosopher([0], hungry, 1) philosopher([1], thinking,
-    0) philosopher([2], hungry, 2) philosopher([3], hungry, 1) philosopher([4], thinking, 0),'get-hungry} {chopstick([
-    1]) philosopher([0], hungry, 1) philosopher([1], hungry, 0) philosopher([2], hungry, 2) philosopher([3], hungry, 1)
-    philosopher([4], thinking, 0),'grab-stick} {philosopher([0], hungry, 2) philosopher([1], hungry, 0) philosopher([
-    2], hungry, 2) philosopher([3], hungry, 1) philosopher([4], thinking, 0),'eat} {philosopher([0], eating, 2)
-    philosopher([1], hungry, 0) philosopher([2], hungry, 2) philosopher([3], hungry, 1) philosopher([4], thinking, 0),
-    'think} {chopstick([0]) chopstick([1]) philosopher([0], thinking, 0) philosopher([1], hungry, 0) philosopher([2],
-    hungry, 2) philosopher([3], hungry, 1) philosopher([4], thinking, 0),'grab-stick} {chopstick([0]) philosopher([0],
-    thinking, 0) philosopher([1], hungry, 1) philosopher([2], hungry, 2) philosopher([3], hungry, 1) philosopher([4],
-    thinking, 0),'get-hungry} {chopstick([0]) philosopher([0], hungry, 0) philosopher([1], hungry, 1) philosopher([2],
-    hungry, 2) philosopher([3], hungry, 1) philosopher([4], thinking, 0),'grab-stick} {philosopher([0], hungry, 1)
-    philosopher([1], hungry, 1) philosopher([2], hungry, 2) philosopher([3], hungry, 1) philosopher([4], thinking, 0),
-    'eat} {philosopher([0], hungry, 1) philosopher([1], hungry, 1) philosopher([2], eating, 2) philosopher([3], hungry,
-    1) philosopher([4], thinking, 0),'think} {chopstick([2]) chopstick([3]) philosopher([0], hungry, 1) philosopher([
-    1], hungry, 1) philosopher([2], thinking, 0) philosopher([3], hungry, 1) philosopher([4], thinking, 0),'grab-stick}
-    {chopstick([3]) philosopher([0], hungry, 1) philosopher([1], hungry, 2) philosopher([2], thinking, 0) philosopher([
-    3], hungry, 1) philosopher([4], thinking, 0),'grab-stick} {philosopher([0], hungry, 1) philosopher([1], hungry, 2)
-    philosopher([2], thinking, 0) philosopher([3], hungry, 2) philosopher([4], thinking, 0),'eat} {philosopher([0],
-    hungry, 1) philosopher([1], eating, 2) philosopher([2], thinking, 0) philosopher([3], hungry, 2) philosopher([4],
-    thinking, 0),'think} {chopstick([1]) chopstick([2]) philosopher([0], hungry, 1) philosopher([1], thinking, 0)
-    philosopher([2], thinking, 0) philosopher([3], hungry, 2) philosopher([4], thinking, 0),'grab-stick} {chopstick([
-    2]) philosopher([0], hungry, 2) philosopher([1], thinking, 0) philosopher([2], thinking, 0) philosopher([3],
-    hungry, 2) philosopher([4], thinking, 0),'eat} {chopstick([2]) philosopher([0], eating, 2) philosopher([1],
-    thinking, 0) philosopher([2], thinking, 0) philosopher([3], hungry, 2) philosopher([4], thinking, 0),'think} {
-    chopstick([0]) chopstick([1]) chopstick([2]) philosopher([0], thinking, 0) philosopher([1], thinking, 0)
+    0),'eat} {chopstick([4]) philosopher([0], hungry, 1) philosopher([1], hungry, 1) philosopher([2], eating, 2)
+    philosopher([3], thinking, 0) philosopher([4], thinking, 0),'think} {chopstick([2]) chopstick([3]) chopstick([4])
+    philosopher([0], hungry, 1) philosopher([1], hungry, 1) philosopher([2], thinking, 0) philosopher([3], thinking, 0)
+    philosopher([4], thinking, 0),'get-hungry} {chopstick([2]) chopstick([3]) chopstick([4]) philosopher([0], hungry,
+    1) philosopher([1], hungry, 1) philosopher([2], hungry, 0) philosopher([3], thinking, 0) philosopher([4], thinking,
+    0),'grab-stick} {chopstick([3]) chopstick([4]) philosopher([0], hungry, 1) philosopher([1], hungry, 2) philosopher(
+    [2], hungry, 0) philosopher([3], thinking, 0) philosopher([4], thinking, 0),'grab-stick} {chopstick([4])
+    philosopher([0], hungry, 1) philosopher([1], hungry, 2) philosopher([2], hungry, 1) philosopher([3], thinking, 0)
+    philosopher([4], thinking, 0),'get-hungry} {chopstick([4]) philosopher([0], hungry, 1) philosopher([1], hungry, 2)
+    philosopher([2], hungry, 1) philosopher([3], hungry, 0) philosopher([4], thinking, 0),'grab-stick} {philosopher([
+    0], hungry, 1) philosopher([1], hungry, 2) philosopher([2], hungry, 1) philosopher([3], hungry, 1) philosopher([4],
+    thinking, 0),'eat} {philosopher([0], hungry, 1) philosopher([1], eating, 2) philosopher([2], hungry, 1)
+    philosopher([3], hungry, 1) philosopher([4], thinking, 0),'think} {chopstick([1]) chopstick([2]) philosopher([0],
+    hungry, 1) philosopher([1], thinking, 0) philosopher([2], hungry, 1) philosopher([3], hungry, 1) philosopher([4],
+    thinking, 0),'grab-stick} {chopstick([2]) philosopher([0], hungry, 2) philosopher([1], thinking, 0) philosopher([
+    2], hungry, 1) philosopher([3], hungry, 1) philosopher([4], thinking, 0),'grab-stick} {philosopher([0], hungry, 2)
+    philosopher([1], thinking, 0) philosopher([2], hungry, 2) philosopher([3], hungry, 1) philosopher([4], thinking,
+    0),'eat} {philosopher([0], eating, 2) philosopher([1], thinking, 0) philosopher([2], hungry, 2) philosopher([3],
+    hungry, 1) philosopher([4], thinking, 0),'think} {chopstick([0]) chopstick([1]) philosopher([0], thinking, 0)
+    philosopher([1], thinking, 0) philosopher([2], hungry, 2) philosopher([3], hungry, 1) philosopher([4], thinking,
+    0),'get-hungry} {chopstick([0]) chopstick([1]) philosopher([0], hungry, 0) philosopher([1], thinking, 0)
+    philosopher([2], hungry, 2) philosopher([3], hungry, 1) philosopher([4], thinking, 0),'grab-stick} {chopstick([1])
+    philosopher([0], hungry, 1) philosopher([1], thinking, 0) philosopher([2], hungry, 2) philosopher([3], hungry, 1)
+    philosopher([4], thinking, 0),'get-hungry} {chopstick([1]) philosopher([0], hungry, 1) philosopher([1], hungry, 0)
+    philosopher([2], hungry, 2) philosopher([3], hungry, 1) philosopher([4], thinking, 0),'grab-stick} {philosopher([
+    0], hungry, 2) philosopher([1], hungry, 0) philosopher([2], hungry, 2) philosopher([3], hungry, 1) philosopher([4],
+    thinking, 0),'eat} {philosopher([0], eating, 2) philosopher([1], hungry, 0) philosopher([2], hungry, 2)
+    philosopher([3], hungry, 1) philosopher([4], thinking, 0),'think} {chopstick([0]) chopstick([1]) philosopher([0],
+    thinking, 0) philosopher([1], hungry, 0) philosopher([2], hungry, 2) philosopher([3], hungry, 1) philosopher([4],
+    thinking, 0),'grab-stick} {chopstick([0]) philosopher([0], thinking, 0) philosopher([1], hungry, 1) philosopher([
+    2], hungry, 2) philosopher([3], hungry, 1) philosopher([4], thinking, 0),'get-hungry} {chopstick([0]) philosopher([
+    0], hungry, 0) philosopher([1], hungry, 1) philosopher([2], hungry, 2) philosopher([3], hungry, 1) philosopher([4],
+    thinking, 0),'grab-stick} {philosopher([0], hungry, 1) philosopher([1], hungry, 1) philosopher([2], hungry, 2)
+    philosopher([3], hungry, 1) philosopher([4], thinking, 0),'eat} {philosopher([0], hungry, 1) philosopher([1],
+    hungry, 1) philosopher([2], eating, 2) philosopher([3], hungry, 1) philosopher([4], thinking, 0),'think} {
+    chopstick([2]) chopstick([3]) philosopher([0], hungry, 1) philosopher([1], hungry, 1) philosopher([2], thinking, 0)
+    philosopher([3], hungry, 1) philosopher([4], thinking, 0),'grab-stick} {chopstick([3]) philosopher([0], hungry, 1)
+    philosopher([1], hungry, 2) philosopher([2], thinking, 0) philosopher([3], hungry, 1) philosopher([4], thinking,
+    0),'grab-stick} {philosopher([0], hungry, 1) philosopher([1], hungry, 2) philosopher([2], thinking, 0) philosopher(
+    [3], hungry, 2) philosopher([4], thinking, 0),'eat} {philosopher([0], hungry, 1) philosopher([1], eating, 2)
+    philosopher([2], thinking, 0) philosopher([3], hungry, 2) philosopher([4], thinking, 0),'think} {chopstick([1])
+    chopstick([2]) philosopher([0], hungry, 1) philosopher([1], thinking, 0) philosopher([2], thinking, 0) philosopher(
+    [3], hungry, 2) philosopher([4], thinking, 0),'grab-stick} {chopstick([2]) philosopher([0], hungry, 2) philosopher(
+    [1], thinking, 0) philosopher([2], thinking, 0) philosopher([3], hungry, 2) philosopher([4], thinking, 0),'eat} {
+    chopstick([2]) philosopher([0], eating, 2) philosopher([1], thinking, 0) philosopher([2], thinking, 0) philosopher(
+    [3], hungry, 2) philosopher([4], thinking, 0),'think} {chopstick([0]) chopstick([1]) chopstick([2]) philosopher([
+    0], thinking, 0) philosopher([1], thinking, 0) philosopher([2], thinking, 0) philosopher([3], hungry, 2)
+    philosopher([4], thinking, 0),'get-hungry} {chopstick([0]) chopstick([1]) chopstick([2]) philosopher([0], hungry,
+    0) philosopher([1], thinking, 0) philosopher([2], thinking, 0) philosopher([3], hungry, 2) philosopher([4],
+    thinking, 0),'grab-stick} {chopstick([0]) chopstick([2]) philosopher([0], hungry, 1) philosopher([1], thinking, 0)
     philosopher([2], thinking, 0) philosopher([3], hungry, 2) philosopher([4], thinking, 0),'get-hungry} {chopstick([
-    0]) chopstick([1]) chopstick([2]) philosopher([0], hungry, 0) philosopher([1], thinking, 0) philosopher([2],
-    thinking, 0) philosopher([3], hungry, 2) philosopher([4], thinking, 0),'grab-stick} {chopstick([0]) chopstick([2])
-    philosopher([0], hungry, 1) philosopher([1], thinking, 0) philosopher([2], thinking, 0) philosopher([3], hungry, 2)
-    philosopher([4], thinking, 0),'get-hungry} {chopstick([0]) chopstick([2]) philosopher([0], hungry, 1) philosopher([
-    1], hungry, 0) philosopher([2], thinking, 0) philosopher([3], hungry, 2) philosopher([4], thinking, 0),'grab-stick}
-    {chopstick([2]) philosopher([0], hungry, 2) philosopher([1], hungry, 0) philosopher([2], thinking, 0) philosopher([
-    3], hungry, 2) philosopher([4], thinking, 0),'grab-stick} {philosopher([0], hungry, 2) philosopher([1], hungry, 1)
-    philosopher([2], thinking, 0) philosopher([3], hungry, 2) philosopher([4], thinking, 0),'eat} {philosopher([0],
-    eating, 2) philosopher([1], hungry, 1) philosopher([2], thinking, 0) philosopher([3], hungry, 2) philosopher([4],
-    thinking, 0),'think} {chopstick([0]) chopstick([1]) philosopher([0], thinking, 0) philosopher([1], hungry, 1)
-    philosopher([2], thinking, 0) philosopher([3], hungry, 2) philosopher([4], thinking, 0),'grab-stick} {chopstick([
-    0]) philosopher([0], thinking, 0) philosopher([1], hungry, 2) philosopher([2], thinking, 0) philosopher([3],
-    hungry, 2) philosopher([4], thinking, 0),'get-hungry} {chopstick([0]) philosopher([0], hungry, 0) philosopher([1],
-    hungry, 2) philosopher([2], thinking, 0) philosopher([3], hungry, 2) philosopher([4], thinking, 0),'eat} {
-    chopstick([0]) philosopher([0], hungry, 0) philosopher([1], eating, 2) philosopher([2], thinking, 0) philosopher([
-    3], hungry, 2) philosopher([4], thinking, 0),'get-hungry} {chopstick([0]) philosopher([0], hungry, 0) philosopher([
-    1], eating, 2) philosopher([2], hungry, 0) philosopher([3], hungry, 2) philosopher([4], thinking, 0),'grab-stick} {
-    philosopher([0], hungry, 1) philosopher([1], eating, 2) philosopher([2], hungry, 0) philosopher([3], hungry, 2)
-    philosopher([4], thinking, 0),'think} {chopstick([1]) chopstick([2]) philosopher([0], hungry, 1) philosopher([1],
-    thinking, 0) philosopher([2], hungry, 0) philosopher([3], hungry, 2) philosopher([4], thinking, 0),'grab-stick} {
-    chopstick([2]) philosopher([0], hungry, 2) philosopher([1], thinking, 0) philosopher([2], hungry, 0) philosopher([
-    3], hungry, 2) philosopher([4], thinking, 0),'grab-stick} {philosopher([0], hungry, 2) philosopher([1], thinking,
-    0) philosopher([2], hungry, 1) philosopher([3], hungry, 2) philosopher([4], thinking, 0),'eat} {philosopher([0],
-    eating, 2) philosopher([1], thinking, 0) philosopher([2], hungry, 1) philosopher([3], hungry, 2) philosopher([4],
-    thinking, 0),'think} {chopstick([0]) chopstick([1]) philosopher([0], thinking, 0) philosopher([1], thinking, 0)
-    philosopher([2], hungry, 1) philosopher([3], hungry, 2) philosopher([4], thinking, 0),'get-hungry} {chopstick([0])
-    chopstick([1]) philosopher([0], hungry, 0) philosopher([1], thinking, 0) philosopher([2], hungry, 1) philosopher([
-    3], hungry, 2) philosopher([4], thinking, 0),'grab-stick} {chopstick([1]) philosopher([0], hungry, 1) philosopher([
-    1], thinking, 0) philosopher([2], hungry, 1) philosopher([3], hungry, 2) philosopher([4], thinking, 0),'get-hungry}
-    {chopstick([1]) philosopher([0], hungry, 1) philosopher([1], hungry, 0) philosopher([2], hungry, 1) philosopher([
-    3], hungry, 2) philosopher([4], thinking, 0),'grab-stick} {philosopher([0], hungry, 2) philosopher([1], hungry, 0)
-    philosopher([2], hungry, 1) philosopher([3], hungry, 2) philosopher([4], thinking, 0),'eat} {philosopher([0],
-    eating, 2) philosopher([1], hungry, 0) philosopher([2], hungry, 1) philosopher([3], hungry, 2) philosopher([4],
-    thinking, 0),'think} {chopstick([0]) chopstick([1]) philosopher([0], thinking, 0) philosopher([1], hungry, 0)
-    philosopher([2], hungry, 1) philosopher([3], hungry, 2) philosopher([4], thinking, 0),'grab-stick} {chopstick([0])
-    philosopher([0], thinking, 0) philosopher([1], hungry, 1) philosopher([2], hungry, 1) philosopher([3], hungry, 2)
-    philosopher([4], thinking, 0),'get-hungry} {chopstick([0]) philosopher([0], hungry, 0) philosopher([1], hungry, 1)
-    philosopher([2], hungry, 1) philosopher([3], hungry, 2) philosopher([4], thinking, 0),'grab-stick} {philosopher([
-    0], hungry, 1) philosopher([1], hungry, 1) philosopher([2], hungry, 1) philosopher([3], hungry, 2) philosopher([4],
-    thinking, 0),'eat} {philosopher([0], hungry, 1) philosopher([1], hungry, 1) philosopher([2], hungry, 1)
-    philosopher([3], eating, 2) philosopher([4], thinking, 0),'think} {chopstick([3]) chopstick([4]) philosopher([0],
-    hungry, 1) philosopher([1], hungry, 1) philosopher([2], hungry, 1) philosopher([3], thinking, 0) philosopher([4],
-    thinking, 0),'get-hungry} {chopstick([3]) chopstick([4]) philosopher([0], hungry, 1) philosopher([1], hungry, 1)
-    philosopher([2], hungry, 1) philosopher([3], hungry, 0) philosopher([4], thinking, 0),'grab-stick} {chopstick([4])
-    philosopher([0], hungry, 1) philosopher([1], hungry, 1) philosopher([2], hungry, 2) philosopher([3], hungry, 0)
-    philosopher([4], thinking, 0),'eat} {chopstick([4]) philosopher([0], hungry, 1) philosopher([1], hungry, 1)
-    philosopher([2], eating, 2) philosopher([3], hungry, 0) philosopher([4], thinking, 0),'think} {chopstick([2])
-    chopstick([3]) chopstick([4]) philosopher([0], hungry, 1) philosopher([1], hungry, 1) philosopher([2], thinking, 0)
-    philosopher([3], hungry, 0) philosopher([4], thinking, 0),'grab-stick} {chopstick([3]) chopstick([4]) philosopher([
-    0], hungry, 1) philosopher([1], hungry, 2) philosopher([2], thinking, 0) philosopher([3], hungry, 0) philosopher([
-    4], thinking, 0),'grab-stick} {chopstick([4]) philosopher([0], hungry, 1) philosopher([1], hungry, 2) philosopher([
-    2], thinking, 0) philosopher([3], hungry, 1) philosopher([4], thinking, 0),'eat} {chopstick([4]) philosopher([0],
-    hungry, 1) philosopher([1], eating, 2) philosopher([2], thinking, 0) philosopher([3], hungry, 1) philosopher([4],
-    thinking, 0),'think} {chopstick([1]) chopstick([2]) chopstick([4]) philosopher([0], hungry, 1) philosopher([1],
-    thinking, 0) philosopher([2], thinking, 0) philosopher([3], hungry, 1) philosopher([4], thinking, 0),'grab-stick} {
-    chopstick([2]) chopstick([4]) philosopher([0], hungry, 2) philosopher([1], thinking, 0) philosopher([2], thinking,
-    0) philosopher([3], hungry, 1) philosopher([4], thinking, 0),'eat} {chopstick([2]) chopstick([4]) philosopher([0],
-    eating, 2) philosopher([1], thinking, 0) philosopher([2], thinking, 0) philosopher([3], hungry, 1) philosopher([4],
-    thinking, 0),'think} {chopstick([0]) chopstick([1]) chopstick([2]) chopstick([4]) philosopher([0], thinking, 0)
+    0]) chopstick([2]) philosopher([0], hungry, 1) philosopher([1], hungry, 0) philosopher([2], thinking, 0)
+    philosopher([3], hungry, 2) philosopher([4], thinking, 0),'grab-stick} {chopstick([2]) philosopher([0], hungry, 2)
+    philosopher([1], hungry, 0) philosopher([2], thinking, 0) philosopher([3], hungry, 2) philosopher([4], thinking,
+    0),'grab-stick} {philosopher([0], hungry, 2) philosopher([1], hungry, 1) philosopher([2], thinking, 0) philosopher(
+    [3], hungry, 2) philosopher([4], thinking, 0),'eat} {philosopher([0], eating, 2) philosopher([1], hungry, 1)
+    philosopher([2], thinking, 0) philosopher([3], hungry, 2) philosopher([4], thinking, 0),'think} {chopstick([0])
+    chopstick([1]) philosopher([0], thinking, 0) philosopher([1], hungry, 1) philosopher([2], thinking, 0) philosopher(
+    [3], hungry, 2) philosopher([4], thinking, 0),'grab-stick} {chopstick([0]) philosopher([0], thinking, 0)
+    philosopher([1], hungry, 2) philosopher([2], thinking, 0) philosopher([3], hungry, 2) philosopher([4], thinking,
+    0),'get-hungry} {chopstick([0]) philosopher([0], hungry, 0) philosopher([1], hungry, 2) philosopher([2], thinking,
+    0) philosopher([3], hungry, 2) philosopher([4], thinking, 0),'eat} {chopstick([0]) philosopher([0], hungry, 0)
+    philosopher([1], eating, 2) philosopher([2], thinking, 0) philosopher([3], hungry, 2) philosopher([4], thinking,
+    0),'get-hungry} {chopstick([0]) philosopher([0], hungry, 0) philosopher([1], eating, 2) philosopher([2], hungry, 0)
+    philosopher([3], hungry, 2) philosopher([4], thinking, 0),'grab-stick} {philosopher([0], hungry, 1) philosopher([
+    1], eating, 2) philosopher([2], hungry, 0) philosopher([3], hungry, 2) philosopher([4], thinking, 0),'think} {
+    chopstick([1]) chopstick([2]) philosopher([0], hungry, 1) philosopher([1], thinking, 0) philosopher([2], hungry, 0)
+    philosopher([3], hungry, 2) philosopher([4], thinking, 0),'grab-stick} {chopstick([2]) philosopher([0], hungry, 2)
+    philosopher([1], thinking, 0) philosopher([2], hungry, 0) philosopher([3], hungry, 2) philosopher([4], thinking,
+    0),'grab-stick} {philosopher([0], hungry, 2) philosopher([1], thinking, 0) philosopher([2], hungry, 1) philosopher(
+    [3], hungry, 2) philosopher([4], thinking, 0),'eat} {philosopher([0], eating, 2) philosopher([1], thinking, 0)
+    philosopher([2], hungry, 1) philosopher([3], hungry, 2) philosopher([4], thinking, 0),'think} {chopstick([0])
+    chopstick([1]) philosopher([0], thinking, 0) philosopher([1], thinking, 0) philosopher([2], hungry, 1) philosopher(
+    [3], hungry, 2) philosopher([4], thinking, 0),'get-hungry} {chopstick([0]) chopstick([1]) philosopher([0], hungry,
+    0) philosopher([1], thinking, 0) philosopher([2], hungry, 1) philosopher([3], hungry, 2) philosopher([4], thinking,
+    0),'grab-stick} {chopstick([1]) philosopher([0], hungry, 1) philosopher([1], thinking, 0) philosopher([2], hungry,
+    1) philosopher([3], hungry, 2) philosopher([4], thinking, 0),'get-hungry} {chopstick([1]) philosopher([0], hungry,
+    1) philosopher([1], hungry, 0) philosopher([2], hungry, 1) philosopher([3], hungry, 2) philosopher([4], thinking,
+    0),'grab-stick} {philosopher([0], hungry, 2) philosopher([1], hungry, 0) philosopher([2], hungry, 1) philosopher([
+    3], hungry, 2) philosopher([4], thinking, 0),'eat} {philosopher([0], eating, 2) philosopher([1], hungry, 0)
+    philosopher([2], hungry, 1) philosopher([3], hungry, 2) philosopher([4], thinking, 0),'think} {chopstick([0])
+    chopstick([1]) philosopher([0], thinking, 0) philosopher([1], hungry, 0) philosopher([2], hungry, 1) philosopher([
+    3], hungry, 2) philosopher([4], thinking, 0),'grab-stick} {chopstick([0]) philosopher([0], thinking, 0)
+    philosopher([1], hungry, 1) philosopher([2], hungry, 1) philosopher([3], hungry, 2) philosopher([4], thinking, 0),
+    'get-hungry} {chopstick([0]) philosopher([0], hungry, 0) philosopher([1], hungry, 1) philosopher([2], hungry, 1)
+    philosopher([3], hungry, 2) philosopher([4], thinking, 0),'grab-stick} {philosopher([0], hungry, 1) philosopher([
+    1], hungry, 1) philosopher([2], hungry, 1) philosopher([3], hungry, 2) philosopher([4], thinking, 0),'eat} {
+    philosopher([0], hungry, 1) philosopher([1], hungry, 1) philosopher([2], hungry, 1) philosopher([3], eating, 2)
+    philosopher([4], thinking, 0),'think} {chopstick([3]) chopstick([4]) philosopher([0], hungry, 1) philosopher([1],
+    hungry, 1) philosopher([2], hungry, 1) philosopher([3], thinking, 0) philosopher([4], thinking, 0),'get-hungry} {
+    chopstick([3]) chopstick([4]) philosopher([0], hungry, 1) philosopher([1], hungry, 1) philosopher([2], hungry, 1)
+    philosopher([3], hungry, 0) philosopher([4], thinking, 0),'grab-stick} {chopstick([4]) philosopher([0], hungry, 1)
+    philosopher([1], hungry, 1) philosopher([2], hungry, 2) philosopher([3], hungry, 0) philosopher([4], thinking, 0),
+    'eat} {chopstick([4]) philosopher([0], hungry, 1) philosopher([1], hungry, 1) philosopher([2], eating, 2)
+    philosopher([3], hungry, 0) philosopher([4], thinking, 0),'think} {chopstick([2]) chopstick([3]) chopstick([4])
+    philosopher([0], hungry, 1) philosopher([1], hungry, 1) philosopher([2], thinking, 0) philosopher([3], hungry, 0)
+    philosopher([4], thinking, 0),'grab-stick} {chopstick([3]) chopstick([4]) philosopher([0], hungry, 1) philosopher([
+    1], hungry, 2) philosopher([2], thinking, 0) philosopher([3], hungry, 0) philosopher([4], thinking, 0),'grab-stick}
+    {chopstick([4]) philosopher([0], hungry, 1) philosopher([1], hungry, 2) philosopher([2], thinking, 0) philosopher([
+    3], hungry, 1) philosopher([4], thinking, 0),'eat} {chopstick([4]) philosopher([0], hungry, 1) philosopher([1],
+    eating, 2) philosopher([2], thinking, 0) philosopher([3], hungry, 1) philosopher([4], thinking, 0),'think} {
+    chopstick([1]) chopstick([2]) chopstick([4]) philosopher([0], hungry, 1) philosopher([1], thinking, 0) philosopher(
+    [2], thinking, 0) philosopher([3], hungry, 1) philosopher([4], thinking, 0),'grab-stick} {chopstick([2]) chopstick(
+    [4]) philosopher([0], hungry, 2) philosopher([1], thinking, 0) philosopher([2], thinking, 0) philosopher([3],
+    hungry, 1) philosopher([4], thinking, 0),'eat} {chopstick([2]) chopstick([4]) philosopher([0], eating, 2)
     philosopher([1], thinking, 0) philosopher([2], thinking, 0) philosopher([3], hungry, 1) philosopher([4], thinking,
-    0),'get-hungry} {chopstick([0]) chopstick([1]) chopstick([2]) chopstick([4]) philosopher([0], hungry, 0)
-    philosopher([1], thinking, 0) philosopher([2], thinking, 0) philosopher([3], hungry, 1) philosopher([4], thinking,
-    0),'grab-stick} {chopstick([0]) chopstick([2]) chopstick([4]) philosopher([0], hungry, 1) philosopher([1],
-    thinking, 0) philosopher([2], thinking, 0) philosopher([3], hungry, 1) philosopher([4], thinking, 0),'get-hungry} {
-    chopstick([0]) chopstick([2]) chopstick([4]) philosopher([0], hungry, 1) philosopher([1], hungry, 0) philosopher([
-    2], thinking, 0) philosopher([3], hungry, 1) philosopher([4], thinking, 0),'grab-stick} {chopstick([2]) chopstick([
-    4]) philosopher([0], hungry, 2) philosopher([1], hungry, 0) philosopher([2], thinking, 0) philosopher([3], hungry,
-    1) philosopher([4], thinking, 0),'grab-stick} {chopstick([4]) philosopher([0], hungry, 2) philosopher([1], hungry,
-    1) philosopher([2], thinking, 0) philosopher([3], hungry, 1) philosopher([4], thinking, 0),'eat} {chopstick([4])
+    0),'think} {chopstick([0]) chopstick([1]) chopstick([2]) chopstick([4]) philosopher([0], thinking, 0) philosopher([
+    1], thinking, 0) philosopher([2], thinking, 0) philosopher([3], hungry, 1) philosopher([4], thinking, 0),
+    'get-hungry} {chopstick([0]) chopstick([1]) chopstick([2]) chopstick([4]) philosopher([0], hungry, 0) philosopher([
+    1], thinking, 0) philosopher([2], thinking, 0) philosopher([3], hungry, 1) philosopher([4], thinking, 0),
+    'grab-stick} {chopstick([0]) chopstick([2]) chopstick([4]) philosopher([0], hungry, 1) philosopher([1], thinking,
+    0) philosopher([2], thinking, 0) philosopher([3], hungry, 1) philosopher([4], thinking, 0),'get-hungry} {chopstick(
+    [0]) chopstick([2]) chopstick([4]) philosopher([0], hungry, 1) philosopher([1], hungry, 0) philosopher([2],
+    thinking, 0) philosopher([3], hungry, 1) philosopher([4], thinking, 0),'grab-stick} {chopstick([2]) chopstick([4])
+    philosopher([0], hungry, 2) philosopher([1], hungry, 0) philosopher([2], thinking, 0) philosopher([3], hungry, 1)
+    philosopher([4], thinking, 0),'grab-stick} {chopstick([4]) philosopher([0], hungry, 2) philosopher([1], hungry, 1)
+    philosopher([2], thinking, 0) philosopher([3], hungry, 1) philosopher([4], thinking, 0),'eat} {chopstick([4])
     philosopher([0], eating, 2) philosopher([1], hungry, 1) philosopher([2], thinking, 0) philosopher([3], hungry, 1)
     philosopher([4], thinking, 0),'think} {chopstick([0]) chopstick([1]) chopstick([4]) philosopher([0], thinking, 0)
     philosopher([1], hungry, 1) philosopher([2], thinking, 0) philosopher([3], hungry, 1) philosopher([4], thinking,
