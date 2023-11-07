@@ -1,0 +1,29 @@
+omod BAKERY is
+    protecting NAT .
+    sort GBState Mode .
+
+    ops sleep wait crit : -> Mode [ctor] .
+
+    class BProcess | mode : Mode, number : Nat .
+    class Dispenser | next : Nat, last : Nat .
+
+    op [[_]] : Configuration -> GBState [ctor] .
+    ---op __ : Configuration Configuration -> Configuration [ctor comm assoc id: none] .
+
+    var Conf : Configuration .
+
+    rl [waiting] : [[ < D:Oid : Dispenser | next : Next:Nat, last : Last:Nat > < P:Oid : BProcess | mode : sleep, number : N:Nat > Conf ]]
+        =>  [[ < D:Oid : Dispenser | next : Next:Nat, last : s Last:Nat > < P:Oid : BProcess | mode : wait, number : Last:Nat  > Conf ]] .
+
+
+    var N : Nat .
+    op id : Nat -> Oid .
+
+    op initProcesses_ : Nat -> Configuration .
+    eq initProcesses 0 = none .
+    eq initProcesses s N = < id(s N) : BProcess | mode : sleep, number : s N > initProcesses N .
+
+    op initial_ : Nat -> GBState .
+    eq initial N = [[ < id(s N) : Dispenser | next : 1, last : 1 > initProcesses N ]] .
+
+endom
